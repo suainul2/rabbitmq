@@ -8,9 +8,9 @@ use PhpAmqpLib\Message\AMQPMessage;
 class Publisher extends RabbitmqService
 {
     private $routing = "",$body = [];
-    public function __constructor($routing)
+    public function __construct($routing)
     {
-        parent::__constructor();
+        parent::__construct();
         $this->routing = $routing;
     }
 

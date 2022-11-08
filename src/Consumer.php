@@ -1,16 +1,12 @@
 <?php
 
 namespace Suainul\Rabbitmq;
-
-use PhpAmqpLib\Channel\AMQPChannel;
-use PhpAmqpLib\Message\AMQPMessage;
-
 class Consumer extends RabbitmqService
 {
     private $routing = "";
-    public function __constructor($routing)
+    public function __construct($routing)
     {
-        parent::__constructor();
+        parent::__construct();
         $this->routing = $routing;
     }
 
