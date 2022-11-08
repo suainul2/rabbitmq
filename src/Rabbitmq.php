@@ -1,16 +1,14 @@
 <?php
 
 namespace Suainul\Rabbitmq;
-
-
 class Rabbitmq
 {
-    public function publisher()
+    public function publisher($routing)
     {
-        return new Publisher;
+        return new Publisher($routing);
     }
-    public function consumer()
+    public function consumer($routing)
     {
-        return new Consumer;
+        return new Consumer($routing);
     }
 }
