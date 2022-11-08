@@ -9,4 +9,8 @@ class Rabbitmq
     {
         return new Publisher;
     }
+    public function consumer()
+    {
+        return new Consumer;
+    }
 }
