@@ -1,0 +1,30 @@
+{
+    "name": "suainul/rabbitmq",
+    "description": "pub/sub rabbitmq laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Suainul\\Rabbitmq\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "suainul2",
+            "email": "suainulovi@gmail.com"
+        }
+    ],
+    "require": {
+        "php-amqplib/php-amqplib": "^3.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Suainul\\Rabbitmq\\Providers\\RabbitmqProvider"
+            ],
+            "aliases": {
+                "Rabbitmq": "Suainul\\Rabbitmq\\Facades\\RabbitmqFacade"
+            }
+        }
+    }
+}
