@@ -15,6 +15,7 @@ class Consumer extends RabbitmqService
         while ($this->channel->is_open()) {
             $this->channel->wait();
         }
+        $this->close();
     }
 
     public function fanOut($callback)
@@ -31,8 +32,7 @@ class Consumer extends RabbitmqService
             $this->channel->wait();
         }
 
-        $this->channel->close();
-        $this->connection->close();
+        $this->close();
     }
 
     public function topic($binding_keys = [],$callback)
@@ -50,7 +50,6 @@ class Consumer extends RabbitmqService
             $this->channel->wait();
         }
 
-        $this->channel->close();
-        $this->connection->close();
+        $this->close();
     }
 }

@@ -18,8 +18,7 @@ class Publisher extends RabbitmqService
         $this->channel->queue_declare($this->routing, false, false, false, false);
         $msg = new AMQPMessage(json_encode($this->body));
         $this->channel->basic_publish($msg, '', $this->routing);
-        $this->channel->close();
-        $this->connection->close();
+        $this->close();
     }
 
     public function fanOut()
@@ -27,8 +26,7 @@ class Publisher extends RabbitmqService
         $this->exchange();
         $msg = new AMQPMessage($this->body);
         $this->channel->basic_publish($msg, $this->routing);
-        $this->channel->close();
-        $this->connection->close();
+        $this->close();
     }
 
     public function topic($routing_key = 'anonymous.info')
@@ -36,8 +34,7 @@ class Publisher extends RabbitmqService
         $this->exchange("topic");
         $msg = new AMQPMessage($this->body);
         $this->channel->basic_publish($msg, $this->routing, $routing_key);
-        $this->channel->close();
-        $this->connection->close();
+        $this->close();
     }
 
     /**

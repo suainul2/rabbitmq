@@ -21,4 +21,9 @@ class RabbitmqService
         $this->channel->exchange_declare($this->routing, $type, false, false, false);
         return $this;
     }
+    protected function close()
+    {
+        $this->channel->close();
+        $this->connection->close();
+    }
 }
