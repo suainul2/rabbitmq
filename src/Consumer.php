@@ -3,11 +3,9 @@
 namespace Suainul\Rabbitmq;
 class Consumer extends RabbitmqService
 {
-    private $routing = "";
     public function __construct($routing)
     {
-        parent::__construct();
-        $this->routing = $routing;
+        parent::__construct($routing);
     }
 
     public function direct($callback)
@@ -17,5 +15,42 @@ class Consumer extends RabbitmqService
         while ($this->channel->is_open()) {
             $this->channel->wait();
         }
+    }
+
+    public function fanOut($callback)
+    {   
+        $this->exchange();
+        
+        list($queue_name, ,) = $this->channel->queue_declare("", false, false, true, false);
+
+        $this->channel->queue_bind($queue_name, $this->routing);
+
+        $this->channel->basic_consume($queue_name, '', false, true, false, false, $callback);
+
+        while ($this->channel->is_open()) {
+            $this->channel->wait();
+        }
+
+        $this->channel->close();
+        $this->connection->close();
+    }
+
+    public function topic($binding_keys = [],$callback)
+    {
+        $this->exchange('topic');
+        list($queue_name, ,) = $this->channel->queue_declare("", false, false, true, false);
+
+        foreach ($binding_keys as $binding_key) {
+            $this->channel->queue_bind($queue_name, $this->routing, $binding_key);
+        }
+
+        $this->channel->basic_consume($queue_name, '', false, true, false, false, $callback);
+
+        while ($this->channel->is_open()) {
+            $this->channel->wait();
+        }
+
+        $this->channel->close();
+        $this->connection->close();
     }
 }

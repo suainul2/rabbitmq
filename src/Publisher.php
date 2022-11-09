@@ -7,11 +7,10 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class Publisher extends RabbitmqService
 {
-    private $routing = "",$body = [];
+    private $body = [];
     public function __construct($routing)
     {
-        parent::__construct();
-        $this->routing = $routing;
+        parent::__construct($routing);
     }
 
     public function direct()
@@ -19,6 +18,24 @@ class Publisher extends RabbitmqService
         $this->channel->queue_declare($this->routing, false, false, false, false);
         $msg = new AMQPMessage(json_encode($this->body));
         $this->channel->basic_publish($msg, '', $this->routing);
+        $this->channel->close();
+        $this->connection->close();
+    }
+
+    public function fanOut()
+    {   
+        $this->exchange();
+        $msg = new AMQPMessage($this->body);
+        $this->channel->basic_publish($msg, $this->routing);
+        $this->channel->close();
+        $this->connection->close();
+    }
+
+    public function topic($routing_key = 'anonymous.info')
+    {
+        $this->exchange("topic");
+        $msg = new AMQPMessage($this->body);
+        $this->channel->basic_publish($msg, $this->routing, $routing_key);
         $this->channel->close();
         $this->connection->close();
     }

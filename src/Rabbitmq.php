@@ -3,12 +3,17 @@
 namespace Suainul\Rabbitmq;
 class Rabbitmq
 {
-    public function publisher($routing)
+    private string $routing = "";
+    public function setRouting($routing)
     {
-        return new Publisher($routing);
+        $this->routing = $routing;
     }
-    public function consumer($routing)
+    public function publisher()
     {
-        return new Consumer($routing);
+        return new Publisher($this->routing);
+    }
+    public function consumer()
+    {
+        return new Consumer($this->routing);
     }
 }
