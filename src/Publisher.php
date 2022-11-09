@@ -2,7 +2,6 @@
 
 namespace Suainul\Rabbitmq;
 
-use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
 class Publisher extends RabbitmqService
