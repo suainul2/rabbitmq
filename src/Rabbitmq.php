@@ -7,6 +7,7 @@ class Rabbitmq
     public function setRouting($routing)
     {
         $this->routing = $routing;
+        return $this;
     }
     public function publisher()
     {
