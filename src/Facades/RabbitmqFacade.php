@@ -3,6 +3,7 @@
 namespace Suainul\Rabbitmq\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Suainul\Rabbitmq\Rabbitmq;
 
 class RabbitmqFacade extends Facade
 {
@@ -13,6 +14,6 @@ class RabbitmqFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'rabbitmq';
+        return Rabbitmq::class;
     }
 }
