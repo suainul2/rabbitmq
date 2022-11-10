@@ -3,8 +3,6 @@
 namespace Suainul\Rabbitmq\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Suainul\Rabbitmq\Rabbitmq;
-
 class RabbitmqFacade extends Facade
 {
     /**
