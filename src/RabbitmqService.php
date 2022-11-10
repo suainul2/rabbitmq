@@ -10,7 +10,7 @@ class RabbitmqService
     protected AMQPChannel $channel;
     protected AMQPStreamConnection $connection;
     protected string $routing;
-    public function __construct($routing)
+    public function __construct(string $routing)
     {
         $this->routing = $routing;
         $this->connection = new AMQPStreamConnection(config('rabbitmq.host'),config('rabbitmq.port') , config('rabbitmq.username'),config('rabbitmq.password'));

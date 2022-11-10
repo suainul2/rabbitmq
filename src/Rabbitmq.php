@@ -4,7 +4,7 @@ namespace Suainul\Rabbitmq;
 class Rabbitmq
 {
     private string $routing = "";
-    public function setRouting($routing)
+    public function setRouting(string $routing)
     {
         $this->routing = $routing;
         return $this;
