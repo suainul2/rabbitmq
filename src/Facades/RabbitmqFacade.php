@@ -14,6 +14,6 @@ class RabbitmqFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return Rabbitmq::class;
+        return 'rabbitmq';
     }
 }
