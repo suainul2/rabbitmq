@@ -3,7 +3,7 @@
 namespace Suainul\Rabbitmq;
 class Consumer extends RabbitmqService
 {
-    public function __construct($routing)
+    public function __construct(string $routing)
     {
         parent::__construct($routing);
     }
