@@ -30,8 +30,8 @@ class RabbitmqProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/rabbitmq.php', 'rabbitmq');
 
         // Register the service the package provides.
-        $this->app->singleton('rabbitmq', function ($app) {
-            return new Rabbitmq;
+        $this->app->singleton('rabbitmq', function () {
+            return $this->app->make(Rabbitmq::class);
         });
     }
     
